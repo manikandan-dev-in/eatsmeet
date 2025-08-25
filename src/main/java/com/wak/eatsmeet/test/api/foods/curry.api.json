@@ -3,7 +3,7 @@
     "name": "Create Curry",
     "method": "POST",
     "url": "/api/curry",
-    "role": "ADMIN/SUPER_ADMIN",
+    "role": "ADMIN/SUB_ADMIN",
     "headers": {
       "Content-Type": "application/json"
     },
@@ -17,19 +17,19 @@
     "name": "Get All Curries",
     "method": "GET",
     "url": "/api/curry",
-    "role": "USER/ADMIN/SUPER_ADMIN"
+    "role": "USER/ADMIN/SUB_ADMIN"
   },
   {
     "name": "Get Curry by ID",
     "method": "GET",
     "url": "/api/curry/2",
-    "role": "USER/ADMIN/SUPER_ADMIN"
+    "role": "USER/ADMIN/SUB_ADMIN"
   },
   {
     "name": "Update Curry",
     "method": "PUT",
     "url": "/api/curry/2",
-    "role": "ADMIN/SUPER_ADMIN",
+    "role": "ADMIN/SUB_ADMIN",
     "headers": {
       "Content-Type": "application/json"
     },
@@ -43,18 +43,18 @@
     "name": "Delete Curry",
     "method": "DELETE",
     "url": "/api/curry/2",
-    "role": "ADMIN/SUPER_ADMIN"
+    "role": "ADMIN/SUB_ADMIN"
   },
   {
     "name": "Search Curry bu name",
     "method": "GET",
     "url": "/api/curry/search?name=masala",
-    "role": "ADMIN/SUPER_ADMIN/USER"
+    "role": "ADMIN/SUB_ADMIN/USER"
   },
   {
     "name": "Search Curry bu range of price",
     "method": "GET",
     "url": "/api/curry/search?min=0&max=200",
-    "role": "ADMIN/SUPER_ADMIN/USER"
+    "role": "ADMIN/SUB_ADMIN/USER"
   }
 ]

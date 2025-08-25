@@ -3,7 +3,7 @@
     "name": "Create Food",
     "method": "POST",
     "url": "/api/food",
-    "role": "ADMIN/SUPER_ADMIN",
+    "role": "ADMIN/SUB_ADMIN",
     "headers": {
       "Content-Type": "application/json"
     },
@@ -20,19 +20,19 @@
     "name": "Get All Foods",
     "method": "GET",
     "url": "/api/food",
-    "role": "USER/ADMIN/SUPER_ADMIN"
+    "role": "USER/ADMIN/SUB_ADMIN"
   },
   {
     "name": "Get Food by ID",
     "method": "GET",
     "url": "/api/food/1",
-    "role": "USER/ADMIN/SUPER_ADMIN"
+    "role": "USER/ADMIN/SUB_ADMIN"
   },
   {
     "name": "Update Food",
     "method": "PUT",
     "url": "/api/food/1",
-    "role": "ADMIN/SUPER_ADMIN",
+    "role": "ADMIN/SUB_ADMIN",
     "headers": {
       "Content-Type": "application/json"
     },
@@ -46,31 +46,31 @@
     "name": "Delete Food",
     "method": "DELETE",
     "url": "/api/food/1",
-    "role": "ADMIN/SUPER_ADMIN"
+    "role": "ADMIN/SUB_ADMIN"
   },
   {
     "name": "Search Foods by name",
     "method": "GET",
     "url": "/api/food/search?name=rice",
-    "role": "USER/ADMIN/SUPER_ADMIN"
+    "role": "USER/ADMIN/SUB_ADMIN"
   },
   {
     "name": "Search Foods by price",
     "method": "GET",
     "url": "/api/food/search?price=200",
-    "role": "USER/ADMIN/SUPER_ADMIN"
+    "role": "USER/ADMIN/SUB_ADMIN"
   },
   {
     "name": "Search Foods by range of price",
     "method": "GET",
     "url": "/api/food/search?min=0&max=200",
-    "role": "USER/ADMIN/SUPER_ADMIN"
+    "role": "USER/ADMIN/SUB_ADMIN"
   },
   {
     "name": "Search Foods by range of price",
     "method": "GET",
     "url": "/api/food/search?min=0&max=200",
-    "role": "USER/ADMIN/SUPER_ADMIN"
+    "role": "USER/ADMIN/SUB_ADMIN"
   }
 ]
 

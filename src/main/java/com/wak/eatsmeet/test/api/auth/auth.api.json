@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Register as a User",
+    "method": "POST",
+    "url": "/api/auth/register",
+    "role": "",
+    "body": {
+      "name": "Saman kumara",
+      "email": "samanaku@gmail.com",
+      "contact": "0745620000",
+      "nic": "200104001297V",
+      "password": "password"
+    }
+  },
+  {
+    "name": "Login as User/Admin/Sub Admin",
+    "method": "POST",
+    "url": "/api/auth/login",
+    "role": "",
+    "body": {
+      "username": "samanaku@gmail.com",
+      "password": "password"
+    },
+    "response": {
+      "token": "xksjoaiHJHdu.........",
+      "refreshKey": "eyJhbGciOiJIUz....."
+    }
+  },
+  {
+    "name": "Refresh the Token",
+    "method": "POST",
+    "url": "/api/auth/refresh-token",
+    "role": "",
+    "body": {
+      "refreshKey": "eyJhbGciOiJIUz....."
+    },
+    "response": {
+      "token": "GcismkoiojIK........."
+    }
+  },
+  {
+    "name": "Logout from account",
+    "method": "POST",
+    "url": "/api/auth/logout",
+    "role": "USER,ADMIN,SUB_ADMIN",
+    "body": {
+      "refreshToken": "abcd.efgh.ijkl"
+    }
+  }
+]
