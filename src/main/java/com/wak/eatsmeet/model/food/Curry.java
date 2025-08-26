@@ -1,4 +1,4 @@
-package com.wak.eatsmeet.model;
+package com.wak.eatsmeet.model.food;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,17 +14,16 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Foods {
+public class Curry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "food_id")
+    @Column(name = "curry_id")
     private int id;
     private String name;
     private double price;
     private String details;
     private String img_url;
 
-    @OneToMany(mappedBy = "foods", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "curry", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<FoodsCurry> foodsCurries = new HashSet<>();
-
 }

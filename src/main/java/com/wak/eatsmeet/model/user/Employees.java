@@ -1,4 +1,4 @@
-package com.wak.eatsmeet.model;
+package com.wak.eatsmeet.model.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,26 +11,24 @@ import java.util.Date;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
 @Setter
-public class FoodsCurry {
+@Getter
+public class Employees {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "fcry_id")
+    @Column(name = "emp_id")
     private int id;
-
-    @ManyToOne
-    @JoinColumn(name = "food_id")
-    private Foods foods;
-
-    @ManyToOne
-    @JoinColumn(name = "curry_id")
-    private Curry curry;
-
-    private Date date;
+    private String name;
+    private String email;
+    private String contact;
+    private String address;
+    private Date bod;
 
     @Enumerated(EnumType.STRING)
+    private Roles roles;
 
-    private Times times;
+    private Boolean active;
+    private String password;
+    private String refresh_token;
     private String img_url;
 }

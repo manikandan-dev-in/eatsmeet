@@ -1,4 +1,4 @@
-package com.wak.eatsmeet.model;
+package com.wak.eatsmeet.model.food.enums;
 
 public enum ItemTypes {
     SNACKS,

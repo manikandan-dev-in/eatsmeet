@@ -1,5 +1,6 @@
-package com.wak.eatsmeet.model;
+package com.wak.eatsmeet.model.order;
 
+import com.wak.eatsmeet.model.user.Users;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,6 +26,7 @@ public class Orders {
     private Users users;
 
     private Date orderDate;
+    private Date updateDate;
     private double totalAmount;
 
     @Enumerated(EnumType.STRING)

@@ -1,11 +1,11 @@
-package com.wak.eatsmeet.model;
+package com.wak.eatsmeet.model.cart;
 
+import com.wak.eatsmeet.model.food.enums.ItemTypes;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.util.Date;
 
