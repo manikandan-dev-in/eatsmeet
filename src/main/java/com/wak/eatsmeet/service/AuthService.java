@@ -1,0 +1,31 @@
+package com.wak.eatsmeet.service;
+
+import com.wak.eatsmeet.dto.UserRegisterResponse;
+import com.wak.eatsmeet.model.user.Users;
+import com.wak.eatsmeet.repository.user.UserRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+@Service
+public class AuthService {
+    @Autowired
+    private UserRepo userRepo;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(12);
+
+    public UserRegisterResponse userRegister(Users users) {
+        if(userRepo.existsByEmail(users.getEmail())){
+            throw new IllegalArgumentException("This Email already exists.");
+        }
+        if(userRepo.existsByContact()){
+            throw new IllegalArgumentException("This Email already exists.");
+        }
+        if(userRepo.existsByNic()){
+            throw new IllegalArgumentException("This NIC number already exists.");
+        }
+        users.setPassword(bCryptPasswordEncoder.encode(users.getPassword()));
+        Users res = userRepo.save(users);
+        return new UserRegisterResponse(res.getId(), res.getName(), res.getEmail(), res.getContact());
+    }
+}
