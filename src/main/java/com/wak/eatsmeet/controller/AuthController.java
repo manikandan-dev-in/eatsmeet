@@ -5,6 +5,7 @@ import com.wak.eatsmeet.dto.UserRegisterResponse;
 import com.wak.eatsmeet.model.user.UserRole;
 import com.wak.eatsmeet.model.user.Users;
 import com.wak.eatsmeet.service.AuthService;
+import com.wak.eatsmeet.service.EmailService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,8 @@ public class AuthController {
 
     @Autowired
     private AuthService authService;
+    @Autowired
+    private EmailService emailService;
 
     @GetMapping("/")
     public String hello(){
@@ -58,5 +61,17 @@ public class AuthController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("An unexpected error occurred", null));
         }
+    }
+
+    @PostMapping("/mail/validate/send")
+    public ResponseEntity<?> sentValidateLink(@RequestParam String email){
+        try {
+            emailService.sendValidateLinkToUser(email);
+            return ResponseEntity.ok(new ApiResponse<String>("Validation mail sent to " + email, null) );
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse<String>("Error: " + e.getMessage(), null));
+        }
+
     }
 }

@@ -13,5 +13,20 @@
       "contact": "0741231231",
       "password": "ZxbG@87"
     }
+  },
+  {
+    "name": "Send user validate link to the user",
+    "method": "PUT",
+    "url": "/api/mail/validate/user?email=2",
+    "headers": {
+      "Authorization": "Bearer <SUPER_ADMIN_JWT_TOKEN>"
+    },
+    "role": "ADMIN",
+    "body": {
+      "role": "SUB ADMIN",
+      "email": "exmpl@gmail.com",
+      "contact": "0741231231",
+      "password": "ZxbG@87"
+    }
   }
 ]
