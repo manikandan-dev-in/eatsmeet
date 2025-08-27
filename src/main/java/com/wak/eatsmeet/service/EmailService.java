@@ -13,7 +13,7 @@ public class EmailService {
     @Autowired
     private JavaMailSender mailSender;
 
-
+    //send validation mail to user gmail
     public void sendValidateLinkToUser(String email) throws MessagingException {
         String validationLink = "http://localhost:8080/api/auth/validate?token=";
 
