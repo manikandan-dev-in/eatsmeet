@@ -23,8 +23,6 @@ public class AuthController {
 
     @Autowired
     private AuthService authService;
-    @Autowired
-    private EmailService emailService;
 
     @GetMapping("/")
     public String hello(){
@@ -63,15 +61,5 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/mail/validate/send")
-    public ResponseEntity<?> sentValidateLink(@RequestParam String email){
-        try {
-            emailService.sendValidateLinkToUser(email);
-            return ResponseEntity.ok(new ApiResponse<String>("Validation mail sent to " + email, null) );
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ApiResponse<String>("Error: " + e.getMessage(), null));
-        }
 
-    }
 }
