@@ -105,4 +105,13 @@ public class EmployeeService {
 
         return mapToResponse(employeeRepo.save(employees));
     }
+
+    public EmployeeResponse updateEmpRole(int id, String role, String pswd) {
+        Employees employees = employeeRepo.findById(id).orElseThrow(
+                ()-> new IllegalArgumentException("Emp not found with ID: " + id));
+
+        employees.setPassword(bCryptPasswordEncoder.encode(pswd));
+        employees.setRole(Roles.valueOf(role));
+        return mapToResponse(employeeRepo.save(employees));
+    }
 }

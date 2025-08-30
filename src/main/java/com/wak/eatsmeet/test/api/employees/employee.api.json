@@ -72,13 +72,13 @@
   {
     "name": "Change a Employee ROLE",
     "method": "PUT",
-    "url": "/api/emp?id=2",
+    "url": "/api/emp/role/2",
     "headers": {
       "Authorization": "Bearer <SUPER_ADMIN_JWT_TOKEN>"
     },
     "role": "ADMIN",
     "body": {
-      "role": "SUB ADMIN",
+      "role": "SUB_ADMIN",
       "password": "ZxbG@87"
     }
   }

@@ -2,10 +2,13 @@ package com.wak.eatsmeet.controller;
 
 import com.wak.eatsmeet.dto.ApiResponse;
 import com.wak.eatsmeet.dto.EmployeeResponse;
+import com.wak.eatsmeet.dto.UpdateRoleRequest;
 import com.wak.eatsmeet.model.user.Employees;
 import com.wak.eatsmeet.repository.user.EmployeeRepo;
 import com.wak.eatsmeet.service.EmployeeService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/emp")
@@ -108,4 +112,30 @@ public class EmpController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("An unexpected error occurred", null));
         }
     }
+
+    @PutMapping("/role/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> updateEmpRole(
+            @PathVariable int id,
+            @Valid @RequestBody UpdateRoleRequest request,
+            BindingResult result) {
+
+        if (result.hasErrors()) {
+            List<String> errors = result.getAllErrors()
+                    .stream()
+                    .map(ObjectError::getDefaultMessage)
+                    .toList();
+            return ResponseEntity.badRequest().body(new ApiResponse<>("Invalid Input", errors));
+        }
+
+        try {
+            EmployeeResponse res = employeeService.updateEmpRole(id, request.getRole(), request.getPswd());
+            return ResponseEntity.ok(new ApiResponse<>("Successfully updated employee role by id: " + id, res));
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<>(ex.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<>("An unexpected error occurred", null));
+        }
+    }
+
 }
