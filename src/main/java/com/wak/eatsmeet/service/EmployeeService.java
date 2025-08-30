@@ -41,20 +41,38 @@ public class EmployeeService {
         List<EmployeeResponse> employeeResponses = new ArrayList<>();
         List<Employees> employees = employeeRepo.findAll();
         employees.forEach(employees1 -> {
-            EmployeeResponse employeeResponse = new EmployeeResponse();
-            employeeResponse.setId(employees1.getId());
-            employeeResponse.setName(employees1.getName());
-            employeeResponse.setNic(employees1.getNic());
-            employeeResponse.setContact(employees1.getContact());
-            employeeResponse.setBod(employees1.getBod());
-            employeeResponse.setAddress(employees1.getAddress());
-            employeeResponse.setActive(employees1.getActive());
-            employeeResponse.setRole(employees1.getRole());
-            employeeResponse.setImg_url(employees1.getImg_url());
-            employeeResponse.setEmail(employees1.getEmail());
-            employeeResponses.add(employeeResponse);
+            employeeResponses.add(mapToResponse(employees1));
         });
 
         return employeeResponses;
+    }
+
+    public List<EmployeeResponse> getEmpByName(String name) {
+        List<EmployeeResponse> employeeResponses = new ArrayList<>();
+        List<Employees> employees = employeeRepo.findAllByNameContaining(name);
+        if(employees == null){
+            System.out.println("hee");
+            throw new IllegalArgumentException("User can't found with this : "+ name);
+        }
+        employees.forEach(employees1 -> {
+            employeeResponses.add(mapToResponse(employees1));
+        });
+
+        return employeeResponses;
+    }
+
+    private EmployeeResponse mapToResponse(Employees employees) {
+        EmployeeResponse employeeResponse = new EmployeeResponse();
+        employeeResponse.setId(employees.getId());
+        employeeResponse.setName(employees.getName());
+        employeeResponse.setNic(employees.getNic());
+        employeeResponse.setContact(employees.getContact());
+        employeeResponse.setBod(employees.getBod());
+        employeeResponse.setAddress(employees.getAddress());
+        employeeResponse.setActive(employees.getActive());
+        employeeResponse.setRole(employees.getRole());
+        employeeResponse.setImg_url(employees.getImg_url());
+        employeeResponse.setEmail(employees.getEmail());
+        return employeeResponse;
     }
 }

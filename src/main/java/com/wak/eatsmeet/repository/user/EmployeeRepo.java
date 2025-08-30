@@ -9,6 +9,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public interface EmployeeRepo extends JpaRepository<Employees, Integer> {
 
@@ -22,4 +24,7 @@ public interface EmployeeRepo extends JpaRepository<Employees, Integer> {
 
     boolean existsByNic(String nic);
 
+    Employees findByNameContaining(String name);
+
+    List<Employees> findAllByNameContaining(String name);
 }

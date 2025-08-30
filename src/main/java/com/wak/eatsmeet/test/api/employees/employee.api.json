@@ -19,7 +19,7 @@
   {
     "name": "Get All Employees",
     "method": "GET",
-    "url": "/api/emp",
+    "url": "/api/emp/all",
     "headers": {
       "Authorization": "Bearer <SUPER_ADMIN_JWT_TOKEN>"
     },
@@ -28,7 +28,7 @@
   {
     "name": "Get Employees by Name",
     "method": "GET",
-    "url": "/api/emp?name=kamal",
+    "url": "/api/emp/search?name=kamal",
     "headers": {
       "Authorization": "Bearer <SUPER_ADMIN_JWT_TOKEN>"
     },

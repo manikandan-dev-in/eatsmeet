@@ -42,18 +42,31 @@ public class EmpController {
         } catch (IllegalArgumentException ex){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<String>(ex.getMessage(), null));
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("An unexpected error occurred", null));
         }
     }
 
-    @GetMapping
+    @GetMapping("/all")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> getAllEmp(){
         try {
             List<EmployeeResponse>  result = employeeService.getAllEmp();
             return ResponseEntity.ok(new ApiResponse<List<EmployeeResponse>>("Successfully get all employees.", result));
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("An unexpected error occurred", null));
+        }
+    }
+
+    @GetMapping("/search")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> getEmpByName(@RequestParam String name){
+        try {
+            List<EmployeeResponse> emp = employeeService.getEmpByName(name);
+            return ResponseEntity.ok(new ApiResponse<List<EmployeeResponse>>("Successfully get employee by name.", emp));
+        } catch (IllegalArgumentException ex){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<String>(ex.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("An unexpected error occurred", null));
         }
     }
 }
