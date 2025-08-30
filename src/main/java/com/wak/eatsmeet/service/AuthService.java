@@ -47,27 +47,24 @@ public class AuthService {
     }
 
     public TokenResponse verifyUser(LoginRequest loginRequest) {
-        System.out.println("test1");
+        System.out.println("t1" + loginRequest.getLogin() + loginRequest.getPassword());
         Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(loginRequest.getLogin(), loginRequest.getPassword())
         );
+        System.out.println("t2");
 
-        System.out.println("test2");
         if(!authentication.isAuthenticated()){
             throw new RuntimeException("Invalid credentials");
         }
-        System.out.println("test3");
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String role = userDetails.getAuthorities().iterator().next().getAuthority().replace("ROLE_", "");
 
-        System.out.println("test4"+ userDetails.getUsername());
         String activeToken = jwtService.generateActiveToken(userDetails.getUsername(), role);
 
         System.out.println(activeToken);
         String refreshToken = jwtService.generateRefreshToken(userDetails.getUsername(), role);
 
-        System.out.println("test5");
         return new TokenResponse(activeToken, refreshToken);
     }
 
@@ -79,7 +76,6 @@ public class AuthService {
             System.out.println("t1"+ userLogin + role);
             UserDetails userDetails = User.withUsername(userLogin).password("").roles(role).build();
             if(jwtService.validateToken(refreshToken, userDetails)){
-                System.out.println("t2");
                 String newActiveToken = jwtService.generateActiveToken(userLogin, role);
                 return Map.of("activeToken", newActiveToken);
             }

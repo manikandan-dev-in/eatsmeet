@@ -21,25 +21,32 @@ public class MyUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String loginInput) throws UsernameNotFoundException {
+        System.out.println("login: "+ loginInput);
         Users users = null;
 
         if(loginInput.contains("@")){
             users = userRepo.findByEmail(loginInput);
+            System.out.println("1");
             if(users == null){
-                users = employeeRepo.findByContact(loginInput);
+                System.out.println("2");
+                users = employeeRepo.findByEmail(loginInput);
             }
         }
         else{
+            System.out.println("ttt");
             users = userRepo.findByContact(loginInput);
             if(users == null){
                 users = employeeRepo.findByContact(loginInput);
             }
         }
 
+        System.out.println("t3");
         if (users == null) {
+            System.out.println("t4");
             throw new UsernameNotFoundException("User not found with: " + loginInput);
         }
 
+        System.out.println("t5"+ users.getEmail() );
         return User.builder()
                 .username(users.getEmail() != null ? users.getEmail() : users.getContact())
                 .password(users.getPassword())

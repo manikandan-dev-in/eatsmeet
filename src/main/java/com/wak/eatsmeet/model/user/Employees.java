@@ -25,7 +25,7 @@ public class Employees {
     private Date bod;
 
     @Enumerated(EnumType.STRING)
-    private Roles roles;
+    private Roles role;
 
     private Boolean active;
     private String password;
