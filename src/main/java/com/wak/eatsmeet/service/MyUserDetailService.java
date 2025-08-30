@@ -58,8 +58,8 @@ public class MyUserDetailService implements UserDetailsService {
         System.out.println("Authenticated user: " + (loadUser.getEmail() != null ? loadUser.getEmail() : loadUser.getContact()));
 
         return User.builder()
-                //.username(loadUser.getEmail() != null ? loadUser.getEmail() : loadUser.getContact())
-                .username(String.valueOf(loadUser.getId()))
+                .username(loadUser.getEmail() != null ? loadUser.getEmail() : loadUser.getContact())
+                //.username(String.valueOf(loadUser.getId()))
                 .password(loadUser.getPassword())
                 .roles(String.valueOf(loadUser.getRole()))
                 .build();
