@@ -18,6 +18,21 @@ public class EmployeeService {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(12);
 
+    private EmployeeResponse mapToResponse(Employees employees) {
+        EmployeeResponse employeeResponse = new EmployeeResponse();
+        employeeResponse.setId(employees.getId());
+        employeeResponse.setName(employees.getName());
+        employeeResponse.setNic(employees.getNic());
+        employeeResponse.setContact(employees.getContact());
+        employeeResponse.setBod(employees.getBod());
+        employeeResponse.setAddress(employees.getAddress());
+        employeeResponse.setActive(employees.getActive());
+        employeeResponse.setRole(employees.getRole());
+        employeeResponse.setImg_url(employees.getImg_url());
+        employeeResponse.setEmail(employees.getEmail());
+        return employeeResponse;
+    }
+
     public Employees register(Employees emp) {
 
             if(employeeRepo.existsByEmail(emp.getEmail())){
@@ -50,29 +65,21 @@ public class EmployeeService {
     public List<EmployeeResponse> getEmpByName(String name) {
         List<EmployeeResponse> employeeResponses = new ArrayList<>();
         List<Employees> employees = employeeRepo.findAllByNameContaining(name);
-        if(employees == null){
-            System.out.println("hee");
-            throw new IllegalArgumentException("User can't found with this : "+ name);
-        }
+
         employees.forEach(employees1 -> {
             employeeResponses.add(mapToResponse(employees1));
         });
 
+        if (employeeResponses.isEmpty()) {
+            throw new IllegalArgumentException("No users found with name: " + name);
+        }
         return employeeResponses;
     }
 
-    private EmployeeResponse mapToResponse(Employees employees) {
-        EmployeeResponse employeeResponse = new EmployeeResponse();
-        employeeResponse.setId(employees.getId());
-        employeeResponse.setName(employees.getName());
-        employeeResponse.setNic(employees.getNic());
-        employeeResponse.setContact(employees.getContact());
-        employeeResponse.setBod(employees.getBod());
-        employeeResponse.setAddress(employees.getAddress());
-        employeeResponse.setActive(employees.getActive());
-        employeeResponse.setRole(employees.getRole());
-        employeeResponse.setImg_url(employees.getImg_url());
-        employeeResponse.setEmail(employees.getEmail());
-        return employeeResponse;
+    public EmployeeResponse getEmpById(int id) {
+        Employees employees = employeeRepo.findById(id).orElseThrow(
+                        ()-> new IllegalArgumentException("Emp not found with ID: " + id));
+
+        return mapToResponse(employees);
     }
 }

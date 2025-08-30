@@ -69,4 +69,17 @@ public class EmpController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("An unexpected error occurred", null));
         }
     }
+
+    @GetMapping("/search/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> getEmpById(@PathVariable int id){
+        try {
+            EmployeeResponse emp = employeeService.getEmpById(id);
+            return ResponseEntity.ok(new ApiResponse<EmployeeResponse>("Successfully get employee by name.", emp));
+        } catch (IllegalArgumentException ex){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<String>(ex.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("An unexpected error occurred", null));
+        }
+    }
 }
