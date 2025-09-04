@@ -55,7 +55,7 @@ public class CurryController {
         }
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/searchId/{id}")
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUB_ADMIN')")
     public ResponseEntity<?> getCurryById(@PathVariable int id){
         try {

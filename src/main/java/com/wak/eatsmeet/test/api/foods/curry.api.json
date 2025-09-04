@@ -41,13 +41,13 @@
   {
     "name": "Delete Curry",
     "method": "DELETE",
-    "url": "/api/curry/2",
+    "url": "/api/curry/searchId/{2}",
     "role": "ADMIN/SUB_ADMIN"
   },
   {
     "name": "Search Curry bu name",
     "method": "GET",
-    "url": "/api/curry/search-name?name=masala"
+    "url": "/api/curry/searchName/{masala}"
   },
   {
     "name": "Search Curry bu range of price",
