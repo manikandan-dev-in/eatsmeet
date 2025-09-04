@@ -44,16 +44,28 @@ public class CurryController {
     }
 
     @GetMapping("/all")
-    @PreAuthorize("hasAuthority('USER') or hasAuthority('ADMIN') or hasAuthority('SUB_ADMIN')")
     public ResponseEntity<?> getAllCurry(){
         try {
             List<Curry> res = curryService.getAll();
-            return ResponseEntity.ok(new ApiResponse<List<Curry>>("Curry added successfully", res));
+            return ResponseEntity.ok(new ApiResponse<List<Curry>>("Get all curries successfully", res));
         } catch (IllegalArgumentException e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<String>(e.getMessage(), null));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("An unexpected error occurred", null));
         }
     }
-    
+
+    @GetMapping("/search")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUB_ADMIN')")
+    public ResponseEntity<?> getAllCurry(@RequestParam int id){
+        try {
+            Curry res = curryService.getById(id);
+            return ResponseEntity.ok(new ApiResponse<Curry>("Get curry successfully", res));
+        } catch (IllegalArgumentException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<String>(e.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("An unexpected error occurred", null));
+        }
+    }
+
 }

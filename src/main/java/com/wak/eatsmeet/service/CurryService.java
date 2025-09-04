@@ -27,4 +27,11 @@ public class CurryService {
         }
         return curryRepo.findAll();
     }
+
+    public Curry getById(int id) {
+        if(!curryRepo.existsById(id)) {
+            throw new IllegalArgumentException("No curry found with id: " + id);
+        }
+        return curryRepo.findById(id).get();
+    }
 }

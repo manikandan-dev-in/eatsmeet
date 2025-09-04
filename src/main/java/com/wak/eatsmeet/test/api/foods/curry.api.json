@@ -22,13 +22,13 @@
   {
     "name": "Get Curry by ID",
     "method": "GET",
-    "url": "/api/curry/2",
+    "url": "/api/curry/search?id=2",
     "role": "USER/ADMIN/SUB_ADMIN"
   },
   {
     "name": "Update Curry",
     "method": "PUT",
-    "url": "/api/curry/2",
+    "url": "/api/curry/update?id=2",
     "role": "ADMIN/SUB_ADMIN",
     "headers": {
       "Content-Type": "application/json"
