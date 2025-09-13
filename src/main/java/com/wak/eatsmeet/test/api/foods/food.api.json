@@ -54,22 +54,10 @@
     "role": ""
   },
   {
-    "name": "Search Foods by price",
-    "method": "GET",
-    "url": "/api/food/searchByPrice?price=200",
-    "role": "USER/ADMIN/SUB_ADMIN"
-  },
-  {
     "name": "Search Foods by range of price",
     "method": "GET",
-    "url": "/api/food/search?min=0&max=200",
-    "role": "USER/ADMIN/SUB_ADMIN"
-  },
-  {
-    "name": "Search Foods by range of price",
-    "method": "GET",
-    "url": "/api/food/search?min=0&max=200",
-    "role": "USER/ADMIN/SUB_ADMIN"
+    "url": "/api/food/searchByPrice?min=0&max=200",
+    "role": ""
   }
 ]
 
