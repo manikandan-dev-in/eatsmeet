@@ -12,9 +12,7 @@ import com.wak.eatsmeet.repository.food.FoodRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -74,5 +72,13 @@ public class CurryFoodService {
         List<Foods> foodsCurryList = foodCurryRepo.findDistinctFoodsByCurryId(curryId);
 
         return foodsCurryList;
+    }
+
+    public FoodsCurry removeFoodFromCurry(int curryId) {
+        FoodsCurry foodsCurry = foodCurryRepo.findById(curryId)
+                .orElseThrow(()->new IllegalArgumentException("No Foods found for this curry"));
+
+        foodCurryRepo.delete(foodsCurry);
+        return foodsCurry;
     }
 }

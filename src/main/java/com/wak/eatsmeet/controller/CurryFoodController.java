@@ -49,6 +49,26 @@ public class CurryFoodController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>(e.getMessage(), null));
         }
+    }
 
+    // Remove Food from Curry
+    @DeleteMapping("/remove-food-curry/{cfrId}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUB_ADMIN')")
+    public ResponseEntity<?> removeFoodFromCurry(@PathVariable int cfrId){
+//        try {
+//            FoodsCurry response = curryFoodService.removeFoodFromCurry(cfrId);
+//            return ResponseEntity.ok(new ApiResponse<FoodsCurry>("Foods deleted successfully", response));
+//        } catch (IllegalArgumentException ex) {
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<String>(ex.getMessage(), null));
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>(e.getMessage(), null));
+//        }
+
+        try {
+            FoodsCurry response = curryFoodService.removeFoodFromCurry(cfrId);
+            return ResponseEntity.ok(new ApiResponse<FoodsCurry>("Foods deleted successfully", response));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>(e.getMessage(), null));
+        }
     }
 }

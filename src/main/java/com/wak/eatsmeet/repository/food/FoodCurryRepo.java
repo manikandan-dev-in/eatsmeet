@@ -21,5 +21,4 @@ public interface FoodCurryRepo extends JpaRepository<FoodsCurry, Integer> {
     @Query("SELECT DISTINCT fc.foods FROM FoodsCurry fc WHERE fc.curry.id = :curryId")
     List<Foods> findDistinctFoodsByCurryId(@Param("curryId") int curryId);
 
-
 }
