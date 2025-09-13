@@ -1,5 +1,6 @@
 package com.wak.eatsmeet.model.food;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -31,5 +32,6 @@ public class Curry {
     private String img_url;
 
     @OneToMany(mappedBy = "curry", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private Set<FoodsCurry> foodsCurries = new HashSet<>();
 }
