@@ -21,4 +21,10 @@ public interface FoodCurryRepo extends JpaRepository<FoodsCurry, Integer> {
     @Query("SELECT DISTINCT fc.foods FROM FoodsCurry fc WHERE fc.curry.id = :curryId")
     List<Foods> findDistinctFoodsByCurryId(@Param("curryId") int curryId);
 
+    boolean existsByFoods_IdAndDateAndTimes(int foodId, LocalDate date, Times times);
+
+    @Query("SELECT DISTINCT fc.curry FROM FoodsCurry fc WHERE fc.foods.id = :foodId AND fc.date = :date AND fc.times = :times")
+    List<Curry> findDistinctCurryByFoods_IdAndDateAndTimes(@Param("foodId") int foodId,
+                                                           @Param("date") LocalDate date,
+                                                           @Param("times") Times times);
 }

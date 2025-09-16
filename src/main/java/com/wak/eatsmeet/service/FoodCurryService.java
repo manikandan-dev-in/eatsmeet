@@ -12,6 +12,7 @@ import com.wak.eatsmeet.repository.food.FoodRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -62,4 +63,16 @@ public class FoodCurryService {
 
         return dtos;
     }
+
+    public List<Curry> getCurryByFoodsId(int foodId, String date, String time) {
+        LocalDate localDate = LocalDate.parse(date);
+        Times timesEnum = Times.valueOf(time.toUpperCase()); // convert string to enum
+
+        if(!foodCurryRepo.existsByFoods_IdAndDateAndTimes(foodId, localDate, timesEnum)){
+            throw new IllegalArgumentException("No Curry found for this food on given date and time");
+        }
+
+        return foodCurryRepo.findDistinctCurryByFoods_IdAndDateAndTimes(foodId, localDate, timesEnum);
+    }
+
 }

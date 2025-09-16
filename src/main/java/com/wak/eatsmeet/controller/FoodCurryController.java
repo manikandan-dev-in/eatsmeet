@@ -4,6 +4,9 @@ import com.wak.eatsmeet.dto.ApiResponse;
 import com.wak.eatsmeet.dto.food.CurryListDTO;
 import com.wak.eatsmeet.dto.food.FoodIdListDTO;
 import com.wak.eatsmeet.dto.food.FoodsCurryDTO;
+import com.wak.eatsmeet.model.food.Curry;
+import com.wak.eatsmeet.model.food.Foods;
+import com.wak.eatsmeet.model.food.FoodsCurry;
 import com.wak.eatsmeet.service.CurryFoodService;
 import com.wak.eatsmeet.service.FoodCurryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +37,34 @@ public class FoodCurryController {
         }
     }
 
-//    @DeleteMapping("/{curryId}/remove-curry/{foodId}")
-//    public ResponseEntity<?> removeCurryFromFood() {
-//
+    //Get All curry for a food
+    @GetMapping("/{foodId}/date/{date}/time/{time}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUB_ADMIN') or hasAuthority('USER')")
+    public ResponseEntity<?> getCurryByFoodsId(@PathVariable int foodId, @PathVariable String date, @PathVariable String time){
+        try {
+            List<Curry> response = foodCurryService.getCurryByFoodsId(foodId, date, time);
+            String message = String.format(
+                    "Curries fetched successfully for foodId: %d on date: %s at time: %s",
+                    foodId, date, time
+            );
+            return ResponseEntity.ok(new ApiResponse<List<Curry>>(message, response));
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<String>(ex.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>(e.getMessage(), null));
+        }
+    }
+
+    // Remove Food from Curry
+//    @DeleteMapping("/remove-food-curry/{foodId}")
+//    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUB_ADMIN')")
+//    public ResponseEntity<?> removeFoodFromCurry(@PathVariable int cfrId){
+//        try {
+//            FoodsCurry response = curryFoodService.removeFoodFromCurry(cfrId);
+//            return ResponseEntity.ok(new ApiResponse<FoodsCurry>("Foods deleted successfully", response));
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>(e.getMessage(), null));
+//        }
 //    }
 
 }
