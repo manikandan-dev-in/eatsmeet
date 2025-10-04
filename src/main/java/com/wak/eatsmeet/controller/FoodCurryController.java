@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -56,11 +57,12 @@ public class FoodCurryController {
         }
     }
 
-//    @GetMapping("/all")
-//    public ResponseEntity<?> getAllFoodCurryByDate(@RequestBody Map<String, String> request){
-//        String date = request.get("date");
-//        List<FoodsCurry> response = foodCurryService.getFoodsCurryForDate(date);
-//        return ResponseEntity.ok(new ApiResponse<List<FoodsCurry>>("Foods fetched successfully", response));
-//    }
+    @GetMapping("/foodCurry/all")
+    public ResponseEntity<?> getAllFoodCurryByDate(@RequestBody Map<String, String> req){
+        String date = req.get("date");
+        LocalDate parsedDate = LocalDate.parse(date);
+        List<FoodsCurry> res =  foodCurryService.getAllFoodCurryByDate(parsedDate);
+        return ResponseEntity.ok(new ApiResponse<List<FoodsCurry>>("success", res));
+    }
 
 }

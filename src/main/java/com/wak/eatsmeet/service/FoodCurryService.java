@@ -75,7 +75,7 @@ public class FoodCurryService {
         return foodCurryRepo.findDistinctCurryByFoods_IdAndDateAndTimes(foodId, localDate, timesEnum);
     }
 
-//    public List<FoodsCurry> getFoodsCurryForDate(String date){
-//        return foodCurryRepo.findAllByDate(date);
-//    }
+    public List<FoodsCurry> getAllFoodCurryByDate(LocalDate date){
+        return foodCurryRepo.findAllByDate(date);
+    }
 }

@@ -28,4 +28,6 @@ public interface FoodCurryRepo extends JpaRepository<FoodsCurry, Integer> {
                                                            @Param("date") LocalDate date,
                                                            @Param("times") Times times);
 
+    @Query("SELECT fc FROM FoodsCurry fc WHERE fc.date = :date")
+    List<FoodsCurry> findAllByDate(LocalDate date);
 }

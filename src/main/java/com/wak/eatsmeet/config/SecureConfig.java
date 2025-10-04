@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -32,7 +33,7 @@ public class SecureConfig {
                         .requestMatchers("/api/auth/login", "/api/auth/register", "/api/auth/refresh-token", "/api/auth/emp/register").permitAll()
                         .requestMatchers("/api/mail/validate-link").permitAll()
                         .requestMatchers("/api/curry/all", "/api/curry/searchName/{name}", "/api/curry/searchPrice").permitAll()
-                        .requestMatchers("/api/food/all", "/api/food/searchByName/{name}", "/api/food/searchByPrice").permitAll()
+                        .requestMatchers("/api/food/all", "/api/food/foodCurry/all", "/api/food/searchByName/{name}", "/api/food/searchByPrice").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
