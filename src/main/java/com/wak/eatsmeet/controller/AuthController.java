@@ -90,7 +90,7 @@ public class AuthController {
             System.out.println(res);
             return ResponseEntity.ok(new ApiResponse<Map<String, String>>("success", res));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("failed", e.getMessage()));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ApiResponse<String>("failed", e.getMessage()));
         }
     }
 
