@@ -1,6 +1,8 @@
 package com.wak.eatsmeet.controller;
 
 import com.wak.eatsmeet.dto.ApiResponse;
+import com.wak.eatsmeet.dto.EmployeeResponse;
+import com.wak.eatsmeet.dto.UserResponse;
 import com.wak.eatsmeet.model.food.Curry;
 import com.wak.eatsmeet.model.user.Users;
 import com.wak.eatsmeet.service.UserService;
@@ -27,6 +29,17 @@ public class UserController {
             return ResponseEntity.ok(new ApiResponse<Users>("Updated User Successfully", updatedUser));
         } catch (IllegalArgumentException e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ApiResponse<String>(e.getMessage(), null));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("An unexpected error occurred", null));
+        }
+    }
+
+    @GetMapping("/all")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> getAllUsers(){
+        try {
+            List<UserResponse>  result = userService.getAllUsers();
+            return ResponseEntity.ok(new ApiResponse<List<UserResponse>>("Successfully get all users.", result));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<String>("An unexpected error occurred", null));
         }
