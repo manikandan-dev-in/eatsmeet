@@ -1,0 +1,18 @@
+package com.wak.eatsmeet.dto.cart;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class CartResponse {
+
+    private int cartId;
+    private List<CartItemResponse> items;
+    private double totalAmount;
+
+}
