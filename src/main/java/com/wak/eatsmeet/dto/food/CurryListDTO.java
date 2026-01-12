@@ -1,12 +1,8 @@
 package com.wak.eatsmeet.dto.food;
 
-import lombok.*;
-
 import java.time.LocalDate;
 import java.util.List;
 
-
-@Getter
 public class CurryListDTO {
 
     private List<Integer> curryId;
@@ -24,16 +20,32 @@ public class CurryListDTO {
     public CurryListDTO() {
     }
 
+    public List<Integer> getCurryId() {
+        return curryId;
+    }
+
     public void setCurryId(List<Integer> curryId) {
         this.curryId = curryId;
+    }
+
+    public LocalDate getDate() {
+        return date;
     }
 
     public void setDate(LocalDate date) {
         this.date = date;
     }
 
+    public String getTimes() {
+        return times;
+    }
+
     public void setTimes(String times) {
         this.times = times;
+    }
+
+    public String getImg_url() {
+        return img_url;
     }
 
     public void setImg_url(String img_url) {
