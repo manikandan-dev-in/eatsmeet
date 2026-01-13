@@ -14,6 +14,9 @@ public class CartItems {
 
     private int item_id;
 
+    @Column(nullable = true)
+    private int curry_id;
+
     @Enumerated(EnumType.STRING)
     private ItemTypes itemTypes;
 
@@ -26,7 +29,7 @@ public class CartItems {
     @JoinColumn(name = "cart_id", referencedColumnName = "cart_id")
     private Cart cart;
 
-    public CartItems(int id, int item_id, ItemTypes itemTypes, double quantity, double price, Date created_date, boolean selected, Cart cart) {
+    public CartItems(int id, int item_id, ItemTypes itemTypes, double quantity, double price, Date created_date, boolean selected, Cart cart, int curry_id) {
         this.id = id;
         this.item_id = item_id;
         this.itemTypes = itemTypes;
@@ -35,6 +38,7 @@ public class CartItems {
         this.created_date = created_date;
         this.selected = selected;
         this.cart = cart;
+        this.curry_id = curry_id;
     }
 
     public CartItems() {
@@ -102,5 +106,13 @@ public class CartItems {
 
     public void setCart(Cart cart) {
         this.cart = cart;
+    }
+
+    public Integer getCurry_id() {
+        return curry_id;
+    }
+
+    public void setCurry_id(Integer curry_id) {
+        this.curry_id = curry_id;
     }
 }

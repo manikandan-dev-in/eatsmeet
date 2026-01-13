@@ -5,6 +5,7 @@ import com.wak.eatsmeet.model.food.enums.ItemTypes;
 public class CartRequest {
 
     private int itemId;
+    private int curryId;
     private ItemTypes itemType;
     private double quantity;
 
@@ -13,10 +14,11 @@ public class CartRequest {
     }
 
     // All-args constructor
-    public CartRequest(int itemId, ItemTypes itemType, double quantity) {
+    public CartRequest(int itemId, ItemTypes itemType, double quantity, int curry_id) {
         this.itemId = itemId;
         this.itemType = itemType;
         this.quantity = quantity;
+        this.curryId = curry_id;
     }
 
     public int getItemId() {
@@ -41,5 +43,13 @@ public class CartRequest {
 
     public void setQuantity(double quantity) {
         this.quantity = quantity;
+    }
+
+    public int getCurryId() {
+        return curryId;
+    }
+
+    public void setCurryId(int curryId) {
+        this.curryId = curryId;
     }
 }
