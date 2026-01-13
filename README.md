@@ -125,6 +125,7 @@ You can import the full API collection into **Postman** to test endpoints, view 
 
 **[View Postman Collection](https://galactic-moon-315292.postman.co/workspace/My-Workspace~eaa54b7c-323a-4df6-8a4a-ef8ccef88d2f/collection/33857072-c1ed03bc-99bf-47f0-a8f9-6a6dccc5044f?action=share&source=copy-link&creator=33857072)**
 
+Updated postman_collection:  https://github.com/pathuGIT/eatsmeet/blob/main/eatsmeet.postman_collection.json
 The API will be available at `http://localhost:8080`.
 
 ## How to Contribute
