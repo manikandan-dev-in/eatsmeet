@@ -50,10 +50,10 @@ public class GlobalExceptionHandler {
         ApiErrorResponse response = new ApiErrorResponse(
                 exception.getMessage()
                 , new HashMap<>()
-                , HttpStatus.BAD_REQUEST.value()
+                , HttpStatus.NOT_FOUND.value()
         );
 
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
 }

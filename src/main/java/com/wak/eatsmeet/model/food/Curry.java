@@ -21,6 +21,7 @@ public class Curry {
     @NotBlank(message = "Details is required")
     private String details;
 
+    @Column(name = "img_url")
     private String imageUrl;
 
     @OneToMany(mappedBy = "curry", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -71,12 +72,12 @@ public class Curry {
         this.details = details;
     }
 
-    public String getImg_url() {
+    public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setImg_url(String img_url) {
-        this.imageUrl = img_url;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl =imageUrl;
     }
 
     public Set<FoodsCurry> getFoodsCurries() {

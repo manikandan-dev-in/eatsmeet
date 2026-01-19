@@ -42,7 +42,7 @@ public class CurryController {
     }
 
     @PutMapping("/update/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or hsAuthority('SUB_ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('SUB_ADMIN')")
     public ResponseEntity<ApiResponse<CurryResponse>> updateCurry(@PathVariable int id, @Valid @RequestBody UpdateCurryDto updateCurryDto) {
         Curry updatedCurry = curryService.updateCurry(id, curryMapper.toEntity(updateCurryDto));
 
@@ -111,7 +111,7 @@ public class CurryController {
     }
 
     @GetMapping("/searchPrice")
-    public ResponseEntity<?> findAllCurryWithRangePrice(@RequestParam int min, @RequestParam int max) {
+    public ResponseEntity<ApiResponse<List<CurryResponse>>> findAllCurryWithRangePrice(@RequestParam int min, @RequestParam int max) {
         List<Curry> curries = curryService.getAll(min, max);
 
         List<CurryResponse> curryResponses = curries.stream()
